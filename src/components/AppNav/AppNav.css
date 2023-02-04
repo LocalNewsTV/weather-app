@@ -1,0 +1,12 @@
+#searchLocale {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 3px 3px 3px 10px;
+}
+.searchButton {
+  border: 1px solid black;
+  padding: 3px 10px;
+  border-radius: 5px;
+  background-color: #669966;
+  margin-left: 10px;
+}

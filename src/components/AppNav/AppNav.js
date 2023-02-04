@@ -2,7 +2,8 @@ import React from 'react';
 import {hookContext} from '../../App.js';
 
 export const AppNav = () => {
-  const { setLocation } = React.useContext(hookContext);
+  const { setLocation, unit, setUnit } = React.useContext(hookContext);
+  const handleTempClick = () => setUnit(unit === "c" ? "f" : "c");
   const handleClick = () => {
     const value = document.getElementById("searchLocale").value
     if (value.length > 1) {
@@ -12,12 +13,13 @@ export const AppNav = () => {
   }
   return (
     <>
+    <input type="button" className="navBarButton" value={unit === "c" ? "°F" : "°C"} onClick={handleTempClick} />
     <input 
     id="searchLocale" 
     type="text" 
     placeholder="Change Location"></input>
     
-  <input className="searchButton" type="button" value="Search" onClick={handleClick} />
+  <input className="navBarButton" type="button" value="Search" onClick={handleClick} />
   </>
   )  
 }

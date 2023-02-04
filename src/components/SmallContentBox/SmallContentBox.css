@@ -5,8 +5,18 @@ p {
   height: 150px;
   width: 150px;
   border: 2px solid black;
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  background-color: rgb(125,125,125,.5)
+}
+
+@media only screen and (max-width: 825px) {
+  .smallContentBox-cont{
+    height: 100px;
+    width: 100px;
+    overflow-wrap: anywhere;
+  }
 }

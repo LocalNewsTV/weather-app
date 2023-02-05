@@ -35,7 +35,6 @@ const App = () => {
       try{
         const api = process.env.REACT_APP_API_KEY;
         const { data } = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${api}&q=${location}&aqi=no`)
-        console.log(data);
         setApiData(data);
       } catch(ex){
           console.log(ex);
@@ -46,7 +45,6 @@ const App = () => {
   return (
     <hookContext.Provider value={{location, setLocation, apiData, unit, setUnit}}>
       <NavBar/>
-
       <MainCont temp={apiData.current?.temp_c || ""}>
         <div className={"topContent"}>
           <h2 className={"location"}>{apiData.location?.name ? `${apiData.location?.name}, ${apiData.location?.country}` : "Loading..."}</h2>

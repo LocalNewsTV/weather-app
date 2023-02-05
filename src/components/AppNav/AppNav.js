@@ -13,11 +13,17 @@ export const AppNav = () => {
   }
   return (
     <>
-      <input type="button" className="navBarButton" value={unit === "c" ? "°F" : "°C"} onClick={handleTempClick} />
+      <input 
+        type="button" 
+        className="navBarButton" 
+        value={unit === "c" ? "°F" : "°C"} 
+        onClick={handleTempClick}
+      />
       <input 
       id="searchLocale" 
       type="text" 
-      placeholder="Change Location"></input>
+      placeholder="Change Location"
+      onKeyUp={(evt)=>{ if(evt.key === "Enter"){handleClick()}}} />
       
       <input className="navBarButton" type="button" value="Search" onClick={handleClick} />
     </>

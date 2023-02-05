@@ -10,8 +10,24 @@ import axios from 'axios';
 export const hookContext = React.createContext();
 const App = () => {
   const [apiData, setApiData] = React.useState({});
-  const [location, setLocation] = React.useState("V9A");
+  const [location, setLocation] = React.useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
   const [unit, setUnit] = React.useState("c");
+  React.useEffect(() => {
+    (async () => {
+      const location = {};
+      try{
+        if(navigator.geolocation){
+          navigator.geolocation.getCurrentPosition((position)=>{
+            location.lat = (position.coords.latitude).toFixed(4)
+            location.long = (position.coords.longitude).toFixed(4)
+            setLocation(`${location.lat},${location.long}`);
+          })
+        }
+      } catch(ex){
+          console.log("uhoh, hotdog");
+      }
+    })();
+  },[])
   React.useEffect(() => {
     (async () => {
       try{
@@ -33,11 +49,14 @@ const App = () => {
         <div className={"topContent"}>
           <h1>{`${apiData.location?.name}, ${apiData.location?.country}` || "Loading..."}</h1>
           <p>Feels like: {unit === "c"
-                          ? apiData.current?.temp_c || "" 
-                          : apiData.current?.temp_f || ""}</p>
+                          ? `${apiData.current?.temp_c}°C` || "" 
+                          : `${apiData.current?.temp_f}°F` || ""}</p>
         </div>
         <div className={"subContent"}>
-          <SmallContentBoxText content={`${apiData.location?.name}, ${apiData.location?.country}`} />
+          <SmallContentBoxText 
+            content={unit === "c" 
+                     ? `${apiData.current?.feelslike_c}°C` 
+                     : `${apiData.current?.feelslike_f}°F` || ""} />
           <SmallContentBoxImage content={apiData.current?.condition.icon} />
           <SmallContentBoxDate content={apiData.location?.tz_id} />
         </div>

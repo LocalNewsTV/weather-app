@@ -2,9 +2,10 @@ import React from 'react';
 import './App.css';
 import { NavBar } from './components/NavBar/NavBar.js';
 import './components/NavBar/NavBar.css';
-import { SmallContentBoxDate, SmallContentBoxImage, SmallContentBoxText } from './components/SmallContentBox/SmallContentBox.js'
-import './components/SmallContentBox/SmallContentBox.css'
-import { MainCont } from './components/MainCont/MainCont.js'
+import { SmallContentBoxDate, SmallContentBoxImage, SmallContentBoxText } from './components/SmallContentBox/SmallContentBox.js';
+import './components/SmallContentBox/SmallContentBox.css';
+import { MainCont } from './components/MainCont/MainCont.js';
+import './components/MainCont/MainCont.css';
 import axios from 'axios';
 
 export const hookContext = React.createContext();
@@ -28,7 +29,7 @@ const App = () => {
       }
     })();
   },[]);
-  
+
   React.useEffect(() => {
     (async () => {
       try{

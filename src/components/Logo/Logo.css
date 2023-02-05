@@ -4,6 +4,6 @@
   flex-direction: row;
 }
 .logo-title h1{
-  margin: 0 0 0 10px;
-  padding-left: 0px;
+  margin: 0px;
+  padding-left: 10px;
 }

@@ -49,18 +49,18 @@ const App = () => {
 
       <MainCont temp={apiData.current?.temp_c || ""}>
         <div className={"topContent"}>
-          <h1>{`${apiData.location?.name}, ${apiData.location?.country}` || "Loading..."}</h1>
+          <h2 className={"location"}>{apiData.location?.name ? `${apiData.location?.name}, ${apiData.location?.country}` : "Loading..."}</h2>
           <p>Feels like: {unit === "c"
-                          ? `${apiData.current?.temp_c}°C` || "" 
-                          : `${apiData.current?.temp_f}°F` || ""}</p>
+                          ? `${apiData.current?.temp_c || 0.0}°C` 
+                          : `${apiData.current?.temp_f || 0.0}°F`}</p>
         </div>
         <div className={"subContent"}>
           <SmallContentBoxText 
             content={unit === "c" 
-                     ? `${apiData.current?.feelslike_c}°C` 
-                     : `${apiData.current?.feelslike_f}°F` || ""} />
+                     ? `${apiData.current?.feelslike_c || 0.0}°C` 
+                     : `${apiData.current?.feelslike_f || 0.0}°F`} />
           <SmallContentBoxImage content={apiData.current?.condition.icon} />
-          <SmallContentBoxDate content={apiData.location?.tz_id} />
+          <SmallContentBoxDate content={apiData.location?.tz_id}/>
         </div>
       </MainCont>
     </hookContext.Provider>

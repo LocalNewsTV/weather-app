@@ -17,7 +17,7 @@ export const SmallContentBoxDate = ({content}) =>  {
 }
 export const SmallContentBoxText = ({content = ""}) =>  {
   return (
-    <div className={"smallContentBox-cont"}>
+    <div className={"smallContentBox-cont smallContentBox-cont-text"}>
       <p>{content}</p>
     </div>
   )

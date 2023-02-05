@@ -21,13 +21,14 @@ const App = () => {
             location.lat = (position.coords.latitude).toFixed(4)
             location.long = (position.coords.longitude).toFixed(4)
             setLocation(`${location.lat},${location.long}`);
-          })
+          });
         }
       } catch(ex){
-          console.log("uhoh, hotdog");
+          console.log(ex);
       }
     })();
-  },[])
+  },[]);
+  
   React.useEffect(() => {
     (async () => {
       try{

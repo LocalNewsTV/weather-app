@@ -36,7 +36,7 @@ const App = () => {
         console.log(data);
         setApiData(data);
       } catch(ex){
-          console.log("uhoh, hotdog");
+          console.log(ex);
       }
   })();
 },[location]);

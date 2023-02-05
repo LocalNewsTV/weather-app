@@ -11,7 +11,7 @@ export const NavBar = () => {
     <div className="nav-left">
       <Logo/>
       <ul>
-        <a className="navLink" href="https://github.com/LocalNewsTV/WeatherApp">Repo</a>
+        <a className="navLink" href="https://github.com/LocalNewsTV/weather-app">Repo</a>
         <a className="navLink" href="https://github.com/LocalNewsTV">GitHub</a>
         <a className="navLink" href="https://LocalNewsTV.github.io/">Portfolio</a>
       </ul>

@@ -36,7 +36,6 @@ const App = () => {
         const api = process.env.REACT_APP_API_KEY;
         const { data } = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${api}&q=${location}&aqi=no`)
         setApiData(data);
-        console.log(":)");
       } catch(ex){
           console.log(ex);
       }

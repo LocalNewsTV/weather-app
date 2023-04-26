@@ -21,8 +21,12 @@ const App = () => {
           navigator.geolocation.getCurrentPosition((position)=>{
             location.lat = (position.coords.latitude).toFixed(4)
             location.long = (position.coords.longitude).toFixed(4)
+            localStorage.setItem("LastSearchLocale", `${location.lat},${location.long}`)
             setLocation(`${location.lat},${location.long}`);
           });
+        }
+         if(localStorage.getItem("LastSearchLocale")){
+          setLocation(localStorage.getItem("LastSearchLocale"))
         }
       } catch(ex){
           console.log(ex);
@@ -62,14 +66,14 @@ const App = () => {
         <div className={"topContent"}>
           <h2 className={"location"}>{apiData.location?.name ? `${apiData.location?.name}, ${apiData.location?.country}` : "Loading..."}</h2>
           <p>Feels like: {unit === "c"
-                          ? `${apiData.current?.temp_c || 0.0}°C` 
-                          : `${apiData.current?.temp_f || 0.0}°F`}</p>
+                          ? `${apiData.current?.feelslike_c || 0.0}°C` 
+                          : `${apiData.current?.feelslike_f || 0.0}°F`}</p>
         </div>
         <div className={"subContent"}>
           <SmallContentBoxText 
             content={unit === "c" 
-                     ? `${apiData.current?.feelslike_c || 0.0}°C` 
-                     : `${apiData.current?.feelslike_f || 0.0}°F`} />
+                     ? `${apiData.current?.temp_c || 0.0}°C` 
+                     : `${apiData.current?.temp_f || 0.0}°F`} />
           <SmallContentBoxImage content={apiData.current?.condition.icon} />
           <SmallContentBoxDate content={apiData.location?.tz_id}/>
         </div>

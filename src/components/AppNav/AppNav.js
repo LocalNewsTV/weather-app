@@ -6,6 +6,7 @@ export const AppNav = () => {
   const handleTempClick = () => setUnit(unit === "c" ? "f" : "c");
   const handleClick = () => {
     const value = document.getElementById("searchLocale").value
+    localStorage.setItem("LastSearchLocale", value);
     if (value.length > 1) {
       const linted = value.replaceAll(">","").replaceAll("<", "");
       setLocation(linted);

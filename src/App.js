@@ -25,7 +25,7 @@ const App = () => {
             setLocation(`${location.lat},${location.long}`);
           });
         }
-         if(localStorage.getItem("LastSearchLocale")){
+        else if(localStorage.getItem("LastSearchLocale")){
           setLocation(localStorage.getItem("LastSearchLocale"))
         }
       } catch(ex){
@@ -37,8 +37,8 @@ const App = () => {
   React.useEffect(() => {
     const interval = setInterval((async () => {
       try{
-        const api = process.env.REACT_APP_API_KEY;
-        const { data } = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${api}&q=${location}&aqi=no`)
+        const { data } = await axios.post(`https://localnewstv-todo.onrender.com/api/weather`,{ location: location}
+        )
         setApiData(data);
       } catch(ex){
           console.log(ex);
@@ -50,8 +50,8 @@ const App = () => {
   React.useEffect(() => {
     (async () => {
       try{
-        const api = process.env.REACT_APP_API_KEY;
-        const { data } = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${api}&q=${location}&aqi=no`)
+        const { data } = await axios.post(`https://localnewstv-todo.onrender.com/api/weather`,{ location: location}
+        )
         setApiData(data);
       } catch(ex){
           console.log(ex);

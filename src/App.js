@@ -11,29 +11,33 @@ import axios from 'axios';
 export const hookContext = React.createContext();
 const App = () => {
   const [apiData, setApiData] = React.useState({});
-  const [location, setLocation] = React.useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  const [location, setLocation] = React.useState("");
   const [unit, setUnit] = React.useState("c");
   React.useEffect(() => {
     (async () => {
-      const location = {};
+      const locationLatLong = {};
       try{
-        if(navigator.geolocation){
-          navigator.geolocation.getCurrentPosition((position)=>{
-            location.lat = (position.coords.latitude).toFixed(4)
-            location.long = (position.coords.longitude).toFixed(4)
-            localStorage.setItem("LastSearchLocale", `${location.lat},${location.long}`)
-            setLocation(`${location.lat},${location.long}`);
+        navigator.geolocation.getCurrentPosition((position)=>{
+            locationLatLong.lat = (position.coords.latitude).toFixed(4)
+            locationLatLong.long = (position.coords.longitude).toFixed(4)
+            localStorage.setItem("LastSearchLocale", `${locationLatLong.lat},${locationLatLong.long}`)
+            setLocation(`${locationLatLong.lat},${locationLatLong.long}`);
           });
-        }
-        else if(localStorage.getItem("LastSearchLocale")){
+
+        if(!location && localStorage.getItem("LastSearchLocale")){
           setLocation(localStorage.getItem("LastSearchLocale"))
+        }
+        else if(locationLatLong === {}){
+          const defaultLoc = "Victoria";
+          setLocation(defaultLoc)
+          localStorage.setItem("LastSearchLocale", defaultLoc)
         }
       } catch(ex){
           console.log(ex);
       }
     })();
-  },[]);
-
+  },);
+  //Makes page refresh every 5 minutes
   React.useEffect(() => {
     const interval = setInterval((async () => {
       try{
@@ -47,12 +51,15 @@ const App = () => {
   return () => clearInterval(interval);
 });
 
+//Update render when new area searched
   React.useEffect(() => {
     (async () => {
       try{
+        if(location){
         const { data } = await axios.post(`https://localnewstv-todo.onrender.com/api/weather`,{ location: location}
         )
         setApiData(data);
+        }
       } catch(ex){
           console.log(ex);
       }
